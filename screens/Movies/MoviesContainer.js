@@ -2,16 +2,17 @@ import React from "react";
 import MoviesPresenter from "./MoviesPresenter";
 import { movieApi } from "../../api";
 
-export default class MoviesContainer extends React.Component {
+export default class extends React.Component {
   state = {
     loading: true,
     upcoming: null,
     popular: null,
-    nowPlaying: null
+    nowPlaying: null,
+    error: null
   };
 
   async componentDidMount() {
-    let upcoming, popular, nowPlaying;
+    let upcoming, popular, nowPlaying, error;
     try {
       ({
         data: { results: upcoming }
@@ -22,21 +23,22 @@ export default class MoviesContainer extends React.Component {
       ({
         data: { results: nowPlaying }
       } = await movieApi.getNowPlaying());
-      this.setState({
-        upcoming,
-        popular,
-        nowPlaying
-      });
-    } catch (error) {
-      console.log(error);
-      this.setState({ error: "can't get movies." });
+    } catch {
+      error = "Can't get Movies.";
     } finally {
-      this.setState({ loading: false });
+      this.setState({ loading: false, error, upcoming, popular, nowPlaying });
     }
   }
 
   render() {
     const { loading, upcoming, popular, nowPlaying } = this.state;
-    return <MoviesPresenter loading={loading} />;
+    return (
+      <MoviesPresenter
+        loading={loading}
+        upcoming={upcoming}
+        popular={popular}
+        nowPlaying={nowPlaying}
+      />
+    );
   }
 }
