@@ -4,6 +4,8 @@ import styled from "styled-components";
 import makePhotoUrls from "../utils/makePhotoUrls";
 import Layout from "../constants/Layout";
 import MoviePoster from "./MoviePoster";
+import { TINT_COLOR, GREY_COLOR } from "../constants/Color";
+import MovieRating from "./MovieRating";
 
 const Container = styled.View`
   flex: 1;
@@ -25,6 +27,26 @@ const Content = styled.View`
   justify-content: space-between;
 `;
 
+const Column = styled.View`
+  width: 60%;
+`;
+
+const Title = styled.Text`
+  color: ${TINT_COLOR};
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+`;
+
+const Overview = styled.Text`
+  color: ${GREY_COLOR};
+  font-size: 12px;
+`;
+
+const VoteContainer = styled.View`
+  margin: 10px 0px;
+`;
+
 const MovieSlide = ({
   posterPhoto,
   backgroundPhoto,
@@ -36,6 +58,21 @@ const MovieSlide = ({
     <BgImage source={{ uri: makePhotoUrls(backgroundPhoto) }} />
     <Content>
       <MoviePoster path={posterPhoto} />
+      <Column>
+        <Title>{title}</Title>
+        {voteAvg ? (
+          <VoteContainer>
+            <MovieRating votes={voteAvg} />
+          </VoteContainer>
+        ) : null}
+        {overview ? (
+          <Overview>
+            {overview.length > 147
+              ? `${overview.substring(0, 150)}...`
+              : overview}
+          </Overview>
+        ) : null}
+      </Column>
     </Content>
   </Container>
 );

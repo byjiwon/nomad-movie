@@ -5,6 +5,7 @@ import Loader from "../../comonents/Loader";
 import styled from "styled-components";
 import MovieSlider from "../../comonents/MovieSlider";
 import { BG_COLOR } from "../../constants/Color";
+import Section from "../../comonents/Section";
 
 const Container = styled.ScrollView`
   background-color: ${BG_COLOR};
@@ -15,7 +16,8 @@ const MoviesPresenter = ({ loading, upcoming, popular, nowPlaying }) =>
     <Loader />
   ) : (
     <Container>
-      <MovieSlider movies={nowPlaying} />
+      {nowPlaying ? <MovieSlider movies={nowPlaying} /> : null}
+      {upcoming ? <Section movies={upcoming} title="Upcoming Movies" /> : null}
     </Container>
   );
 
