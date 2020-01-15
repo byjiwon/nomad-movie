@@ -29,6 +29,7 @@ const Content = styled.View`
 
 const Column = styled.View`
   width: 60%;
+  align-items: flex-start;
 `;
 
 const Title = styled.Text`
@@ -41,10 +42,22 @@ const Title = styled.Text`
 const Overview = styled.Text`
   color: ${GREY_COLOR};
   font-size: 12px;
+  margin-bottom: 10px;
 `;
 
 const VoteContainer = styled.View`
   margin: 10px 0px;
+`;
+
+const BtnContainer = styled.TouchableOpacity`
+  background-color: #e74c3c;
+  padding: 5px;
+  border-radius: 2.5px;
+`;
+
+const BtnText = styled.Text`
+  color: white;
+  font-size: 12px;
 `;
 
 const MovieSlide = ({
@@ -62,16 +75,19 @@ const MovieSlide = ({
         <Title>{title}</Title>
         {voteAvg ? (
           <VoteContainer>
-            <MovieRating votes={voteAvg} />
+            <MovieRating votes={voteAvg} inSlide={true} />
           </VoteContainer>
         ) : null}
         {overview ? (
           <Overview>
-            {overview.length > 147
-              ? `${overview.substring(0, 150)}...`
+            {overview.length > 117
+              ? `${overview.substring(0, 120)}...`
               : overview}
           </Overview>
         ) : null}
+        <BtnContainer>
+          <BtnText>More Details</BtnText>
+        </BtnContainer>
       </Column>
     </Content>
   </Container>

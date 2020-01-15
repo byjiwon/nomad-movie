@@ -6,7 +6,7 @@ import MovieScreen from "../screens/Movies/MoviesContainer";
 import SearchScreen from "../screens/Search";
 import TVScreen from "../screens/TV";
 import { BG_COLOR } from "../constants/Color";
-import TabBarIcon from "../comonents/TabBarIcons";
+import TabBarIcon from "../components/TabBarIcons";
 import { createStack } from "./config";
 
 const TabNavigation = createBottomTabNavigator(
